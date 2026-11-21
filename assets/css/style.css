@@ -415,3 +415,17 @@
       .beli .qty { flex: 1; justify-content: space-between; }
       .beli .btn { flex: 1 1 100%; order: 3; }
     }
+
+    /* Mega menu: produk nyata */
+    .mega-isi { grid-template-columns: minmax(180px, 1fr) 3fr; }
+    .mega ul li.semua a { color: var(--teks); font-weight: 700; }
+    .mega-produk { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .mega-kartu { display: flex; flex-direction: column; gap: 4px; text-decoration: none; }
+    .mega-kartu img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; background: #DCD9D5; margin-bottom: 6px; }
+    .mega-kartu .nama { font-weight: 700; font-size: 14px; }
+    .mega-kartu .hrg { font-size: 14px; color: var(--teks-2); }
+    .mega-kartu:hover .nama { text-decoration: underline; }
+    .galeri-nav[hidden] { display: none; }
+    .produk .warna { position: relative; z-index: 2; width: max-content; }
+    .produk .warna i { cursor: pointer; }
+    .produk .warna i:hover { box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--teks); }
