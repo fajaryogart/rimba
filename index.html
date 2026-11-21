@@ -17,295 +17,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <style>
-    :root {
-      --hutan: #0C3A2C;
-      --hutan-gelap: #072318;
-      --hijau: #135D46;
-      --hijau-muda: #E4EBE6;
-      --oranye: #E8692A;
-      --oranye-tombol: #C24E18;
-      --oranye-teks: #A9410F;
-      --putih: #FFFFFF;
-      --abu: #F4F4F2;
-      --garis: #DEDEDA;
-      --teks: #141816;
-      --teks-2: #555D59;
-      --display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
-      --body: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
-      --lebar: 1440px;
-    }
-    *, *::before, *::after { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
-    body { margin: 0; font-family: var(--body); color: var(--teks); background: var(--putih); line-height: 1.55; -webkit-font-smoothing: antialiased; }
-    body.kunci { overflow: hidden; }
-    img { max-width: 100%; display: block; }
-    a { color: inherit; }
-    button { font-family: inherit; }
-    :focus-visible { outline: 3px solid var(--oranye); outline-offset: 2px; }
-    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
-    .wrap { max-width: var(--lebar); margin: 0 auto; padding-inline: clamp(16px, 3vw, 40px); }
-
-    /* Tipografi */
-    .judul { margin: 0; font-family: var(--display); font-weight: 800; text-transform: uppercase; letter-spacing: .01em; line-height: .95; }
-    .eyebrow { margin: 0 0 10px; font-size: 12px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
-
-    /* Tombol */
-    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 28px; border-radius: 0;
-      font-size: 14px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; text-decoration: none; border: 2px solid transparent; cursor: pointer; transition: background .15s, color .15s; }
-    .btn-putih { background: #fff; color: var(--teks); }
-    .btn-putih:hover { background: var(--oranye); color: #fff; }
-    .btn-garis-putih { border-color: #fff; color: #fff; background: transparent; }
-    .btn-garis-putih:hover { background: #fff; color: var(--teks); }
-    .btn-gelap { background: var(--teks); color: #fff; }
-    .btn-gelap:hover { background: var(--hijau); }
-    .btn-oranye { background: var(--oranye-tombol); color: #fff; }
-    .btn-oranye:hover { background: var(--oranye-teks); }
-    .tautan { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 2px; }
-    .tautan:hover { color: var(--oranye-teks); }
-
-    /* Bar promo */
-    .promo { background: var(--hutan); color: #fff; font-size: 13px; }
-    .promo .wrap { display: flex; justify-content: center; align-items: center; gap: 10px 28px; min-height: 40px; flex-wrap: wrap; text-align: center; padding-block: 8px; }
-    .promo a { color: #fff; font-weight: 700; }
-    .promo .titik { color: var(--oranye); }
-
-    /* Header */
-    .header { position: sticky; top: 0; z-index: 50; background: #fff; border-bottom: 1px solid var(--garis); }
-    .header-isi { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 24px; min-height: 72px; }
-    .logo img { height: 38px; width: auto; }
-    .menu { display: flex; justify-content: center; gap: 4px; margin: 0; padding: 0; list-style: none; }
-    .menu > li { position: static; }
-    .menu > li > a, .menu > li > button { display: flex; align-items: center; height: 72px; padding: 0 16px; background: none; border: 0; cursor: pointer;
-      font-size: 14px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; text-decoration: none; color: var(--teks); position: relative; }
-    .menu > li > a::after, .menu > li > button::after { content: ""; position: absolute; left: 16px; right: 16px; bottom: 0; height: 3px; background: var(--oranye); transform: scaleX(0); transition: transform .2s; }
-    .menu > li:hover > a::after, .menu > li:hover > button::after, .menu > li.buka > button::after { transform: scaleX(1); }
-    .mega { position: absolute; left: 0; right: 0; top: 100%; background: #fff; border-top: 1px solid var(--garis); box-shadow: 0 18px 30px rgba(0,0,0,.08);
-      visibility: hidden; opacity: 0; transition: opacity .15s, visibility .15s; }
-    .menu > li:hover .mega, .menu > li.buka .mega { visibility: visible; opacity: 1; }
-    .mega-isi { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) 1.4fr; gap: 40px; padding-block: 36px 44px; }
-    .mega h3 { margin: 0 0 14px; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; }
-    .mega ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-    .mega ul a { text-decoration: none; font-size: 15px; color: var(--teks-2); }
-    .mega ul a:hover { color: var(--teks); text-decoration: underline; }
-    .mega-promo { position: relative; display: block; overflow: hidden; color: #fff; text-decoration: none; min-height: 220px; }
-    .mega-promo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-    .mega-promo::before { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,.65), transparent 60%); z-index: 1; }
-    .mega-promo span { position: absolute; left: 20px; bottom: 18px; z-index: 2; font-family: var(--display); font-weight: 800; font-size: 28px; text-transform: uppercase; line-height: 1; }
-
-    .aksi { display: flex; align-items: center; gap: 4px; }
-    .ikon-btn { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: none; border: 0; cursor: pointer; color: var(--teks); border-radius: 50%; }
-    .ikon-btn:hover { background: var(--abu); }
-    .jumlah { position: absolute; top: 4px; right: 2px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; background: var(--oranye-tombol); color: #fff; font-size: 11px; font-weight: 700; line-height: 18px; text-align: center; }
-    .jumlah[hidden] { display: none; }
-    .hamburger { display: none; }
-
-    .cari { display: none; border-top: 1px solid var(--garis); background: #fff; }
-    .cari.buka { display: block; }
-    .cari form { display: flex; gap: 10px; padding-block: 16px; }
-    .cari input { flex: 1; min-width: 0; min-height: 48px; padding: 0 16px; font: inherit; font-size: 16px; border: 1.5px solid var(--teks); border-radius: 0; }
-
-    /* Drawer mobile */
-    .drawer { position: fixed; inset: 0; z-index: 80; visibility: hidden; }
-    .drawer.buka { visibility: visible; }
-    .drawer-latar { position: absolute; inset: 0; background: rgba(0,0,0,.45); opacity: 0; transition: opacity .2s; }
-    .drawer.buka .drawer-latar { opacity: 1; }
-    .drawer-panel { position: absolute; top: 0; bottom: 0; left: 0; width: min(360px, 88vw); background: #fff; transform: translateX(-100%); transition: transform .25s; overflow-y: auto; padding: 16px 20px 32px; }
-    .drawer.buka .drawer-panel { transform: none; }
-    .drawer-atas { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-    .drawer details { border-bottom: 1px solid var(--garis); }
-    .drawer summary, .drawer .drawer-link { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; font-weight: 700; font-size: 15px; letter-spacing: .06em; text-transform: uppercase; cursor: pointer; list-style: none; text-decoration: none; }
-    .drawer summary::-webkit-details-marker { display: none; }
-    .drawer summary::after { content: "+"; font-size: 22px; font-weight: 400; }
-    .drawer details[open] summary::after { content: "–"; }
-    .drawer ul { list-style: none; margin: 0 0 16px; padding: 0; display: grid; gap: 12px; }
-    .drawer ul a { text-decoration: none; color: var(--teks-2); }
-    .drawer .drawer-link { border-bottom: 1px solid var(--garis); }
-
-    /* Hero */
-    .hero { position: relative; min-height: min(86vh, 760px); display: flex; align-items: flex-end; color: #fff; overflow: hidden; background: var(--hutan-gelap); }
-    .hero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 60% 55%; }
-    .hero::before { content: ""; position: absolute; inset: 0; z-index: 1;
-      background: linear-gradient(90deg, rgba(5,22,15,.86) 0%, rgba(5,22,15,.55) 42%, rgba(5,22,15,0) 72%), linear-gradient(0deg, rgba(5,22,15,.55), transparent 45%); }
-    .hero-isi { position: relative; z-index: 2; width: 100%; padding-block: 120px clamp(56px, 9vh, 96px); }
-    .hero .eyebrow { color: #F7A57A; }
-    .hero h1 { font-size: clamp(56px, 9vw, 132px); max-width: 9ch; }
-    .hero h1 em { color: var(--oranye); font-style: italic; }
-    .hero p.lead { margin: 22px 0 0; max-width: 460px; font-size: 18px; color: #E3ECE7; }
-    .hero-cta { margin-top: 34px; display: flex; flex-wrap: wrap; gap: 12px; }
-
-    /* Strip keunggulan */
-    .usp { border-bottom: 1px solid var(--garis); }
-    .usp ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
-    .usp li { display: flex; align-items: center; gap: 12px; padding: 20px 16px; font-size: 14px; font-weight: 600; }
-    .usp li + li { border-left: 1px solid var(--garis); }
-    .usp svg { flex: none; color: var(--hijau); }
-
-    /* Section umum */
-    .seksi { padding-block: clamp(56px, 8vw, 96px); }
-    .seksi-kepala { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px; margin-bottom: 28px; }
-    .seksi-kepala h2 { font-size: clamp(36px, 4.4vw, 56px); }
-
-    /* Kategori */
-    .kategori { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
-    .kat { position: relative; display: block; text-decoration: none; color: #fff; overflow: hidden; aspect-ratio: 3 / 4; background: var(--hutan); }
-    .kat img, .kat .kat-ilus { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
-    .kat .kat-ilus { display: flex; align-items: center; justify-content: center; }
-    .kat:hover img, .kat:hover .kat-ilus { transform: scale(1.05); }
-    .kat::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,.6), transparent 50%); }
-    .kat > span { position: absolute; z-index: 1; left: 20px; right: 20px; bottom: 20px; display: flex; justify-content: space-between; align-items: center;
-      font-family: var(--display); font-weight: 800; font-size: clamp(24px, 2.4vw, 34px); text-transform: uppercase; line-height: 1; }
-
-    /* Produk */
-    .rel-kontrol { display: flex; gap: 8px; }
-    .rel-kontrol button { width: 44px; height: 44px; border: 1.5px solid var(--teks); background: #fff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
-    .rel-kontrol button:hover { background: var(--teks); color: #fff; }
-    .rel-kontrol button:disabled { opacity: .3; cursor: default; background: #fff; color: var(--teks); }
-    .rel { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 3 * 16px) / 4); gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 4px; }
-    .rel::-webkit-scrollbar { display: none; }
-    .produk { scroll-snap-align: start; display: flex; flex-direction: column; min-width: 0; }
-    .produk-foto { position: relative; aspect-ratio: 1 / 1; background: #DCD9D5; overflow: hidden; }
-    .produk-foto img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
-    .produk-foto .ilus { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; transition: transform .4s; }
-    .produk:hover .produk-foto img, .produk:hover .produk-foto .ilus { transform: scale(1.04); }
-    .badge { position: absolute; top: 12px; left: 12px; background: #fff; color: var(--teks); font-size: 11px; font-weight: 700; padding: 5px 9px; letter-spacing: .1em; text-transform: uppercase; }
-    .badge.oranye { background: var(--oranye-tombol); color: #fff; }
-    .suka { position: absolute; top: 8px; right: 8px; width: 40px; height: 40px; border-radius: 50%; border: 0; background: #fff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; color: var(--teks); }
-    .suka[aria-pressed="true"] svg { fill: var(--oranye-tombol); stroke: var(--oranye-tombol); }
-    .produk-isi { padding: 14px 2px 0; display: flex; flex-direction: column; gap: 4px; }
-    .warna { display: flex; gap: 6px; margin-bottom: 6px; }
-    .warna i { width: 16px; height: 16px; border-radius: 50%; border: 1px solid rgba(0,0,0,.2); }
-    .produk h3 { margin: 0; font-size: 16px; font-weight: 700; }
-    .produk h3 a { text-decoration: none; }
-    .produk h3 a:hover { text-decoration: underline; }
-    .produk-kat { margin: 0; font-size: 13px; color: var(--teks-2); }
-    .harga { margin: 4px 0 0; font-size: 15px; font-weight: 700; }
-
-    /* Editorial split */
-    .split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
-    .panel { position: relative; overflow: hidden; min-height: 560px; display: flex; align-items: flex-end; color: #fff; background: var(--hutan); text-decoration: none; }
-    .panel img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s; }
-    .panel:hover img { transform: scale(1.04); }
-    .panel::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(0deg, rgba(4,18,12,.82) 0%, rgba(4,18,12,.2) 55%, transparent 75%); }
-    .panel-isi { position: relative; z-index: 2; padding: clamp(24px, 3vw, 44px); max-width: 520px; }
-    .panel .eyebrow { color: #F7A57A; }
-    .panel h2 { font-size: clamp(36px, 4vw, 56px); }
-    .panel p { margin: 12px 0 22px; color: #E3ECE7; }
-
-    /* Teknologi XPDIC */
-    .teknologi { background: var(--hutan); color: #fff; }
-    .tek-isi { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 80px); align-items: center; }
-    .tek-foto { position: relative; }
-    .tek-foto img { width: 100%; aspect-ratio: 4 / 3.4; object-fit: cover; }
-    .tek-foto .stempel { position: absolute; right: -12px; bottom: 24px; background: var(--oranye-tombol); padding: 14px 18px; font-family: var(--display); font-weight: 800; font-size: 22px; text-transform: uppercase; line-height: 1; }
-    .teknologi .eyebrow { color: #F7A57A; }
-    .teknologi h2 { font-size: clamp(56px, 7vw, 96px); font-style: italic; }
-    .teknologi .lead { margin: 18px 0 0; font-size: 17px; color: #D5E3DC; max-width: 520px; }
-    .spek { margin: 32px 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border-top: 1px solid rgba(255,255,255,.2); }
-    .spek div { padding: 18px 16px 18px 0; border-bottom: 1px solid rgba(255,255,255,.2); }
-    .spek div:nth-child(odd) { border-right: 1px solid rgba(255,255,255,.2); }
-    .spek div:nth-child(even) { padding-left: 20px; }
-    .spek dt { font-family: var(--display); font-weight: 800; font-size: 34px; line-height: 1.1; text-transform: uppercase; }
-    .spek dd { margin: 4px 0 0; font-size: 14px; color: #CFE0D8; }
-    fieldset { margin: 28px 0 0; padding: 0; border: 0; }
-    legend { font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 12px; }
-    .ukuran { display: flex; flex-wrap: wrap; gap: 8px; }
-    .ukuran button { min-width: 54px; min-height: 48px; padding: 0 12px; font-size: 15px; font-weight: 700; cursor: pointer; background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.5); }
-    .ukuran button:hover { border-color: #fff; }
-    .ukuran button[aria-pressed="true"] { background: #fff; color: var(--teks); border-color: #fff; }
-    .ukuran-info { margin: 12px 0 22px; font-size: 14px; color: #CFE0D8; min-height: 1.5em; }
-
-    /* Cerita & nilai */
-    .cerita { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: clamp(32px, 6vw, 96px); align-items: center; }
-    .cerita-logo { background: var(--abu); aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center; padding: 12%; }
-    .cerita .eyebrow { color: var(--oranye-teks); }
-    .cerita h2 { font-size: clamp(36px, 4.2vw, 56px); }
-    .cerita p { margin: 16px 0 0; font-size: 17px; color: #3D4843; max-width: 620px; }
-    .nilai { margin-top: clamp(48px, 6vw, 80px); display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-top: 2px solid var(--teks); }
-    .nilai div { padding: 24px 20px 8px 0; }
-    .nilai div + div { padding-left: 20px; border-left: 1px solid var(--garis); }
-    .nilai h3 { margin: 12px 0 6px; font-family: var(--display); font-weight: 800; font-size: 26px; text-transform: uppercase; }
-    .nilai p { margin: 0; font-size: 14px; color: var(--teks-2); }
-
-    /* Kampanye */
-    .kampanye { background: var(--abu); }
-    .kampanye-isi { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 96px); align-items: center; }
-    .kampanye img { width: 100%; max-width: 440px; margin-inline: auto; box-shadow: 0 30px 60px rgba(0,0,0,.18); }
-    .kampanye .eyebrow { color: var(--oranye-teks); }
-    .kampanye h2 { font-size: clamp(44px, 5.6vw, 76px); font-style: italic; color: var(--hutan); }
-    .kampanye p { margin: 16px 0 0; font-size: 17px; color: #3D4843; max-width: 520px; }
-    .kampanye .btn { margin-top: 28px; }
-
-    /* Langganan */
-    .langganan { background: var(--oranye-tombol); color: #fff; }
-    .langganan-isi { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: center; padding-block: 56px; }
-    .langganan h2 { font-size: clamp(36px, 4vw, 52px); }
-    .langganan p { margin: 10px 0 0; color: #FFE6D8; }
-    .form-email { display: flex; flex-wrap: wrap; gap: 10px; }
-    .form-email input { flex: 1 1 240px; min-width: 0; min-height: 52px; padding: 0 16px; font: inherit; font-size: 16px; border: 0; border-radius: 0; color: var(--teks); }
-    .form-email .btn { min-height: 52px; }
-    .form-pesan { flex-basis: 100%; margin: 2px 0 0; font-size: 14px; font-weight: 600; min-height: 1.5em; }
-
-    /* Footer */
-    footer { background: var(--hutan-gelap); color: #CFE0D8; font-size: 14px; }
-    .footer-atas { display: grid; grid-template-columns: 1.4fr repeat(4, minmax(0, 1fr)); gap: 32px; padding-block: 64px 40px; }
-    .footer-atas img { height: 44px; width: auto; }
-    .footer-atas h3 { margin: 0 0 16px; color: #fff; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; }
-    .footer-atas ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-    footer a { color: #CFE0D8; text-decoration: none; }
-    footer a:hover { color: #fff; text-decoration: underline; }
-    .sosmed { display: flex; gap: 10px; margin-top: 20px; }
-    .sosmed a { width: 40px; height: 40px; border: 1px solid #2D5546; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; }
-    .sosmed a:hover { background: #fff; color: var(--hutan); text-decoration: none; }
-    .footer-bawah { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding-block: 20px 32px; border-top: 1px solid #1E4B3C; font-size: 13px; color: #9CB8AC; }
-
-    /* Toast */
-    .toast { position: fixed; z-index: 90; left: 50%; bottom: 24px; transform: translate(-50%, 140%); background: var(--teks); color: #fff; padding: 14px 20px; font-size: 14px; font-weight: 600; transition: transform .25s; max-width: calc(100vw - 32px); }
-    .toast.tampil { transform: translate(-50%, 0); }
-
-    /* Responsif */
-    @media (max-width: 1080px) {
-      .header nav { display: none; }
-      .hamburger { display: inline-flex; }
-      .header-isi { grid-template-columns: auto 1fr auto; }
-      .logo { justify-self: center; grid-column: 2; }
-      .hamburger { grid-column: 1; grid-row: 1; }
-      .aksi { grid-column: 3; }
-      .rel { grid-auto-columns: calc((100% - 2 * 16px) / 2.5); }
-      .footer-atas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .footer-atas > div:first-child { grid-column: 1 / -1; }
-      .nilai { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-      .nilai div:nth-child(4) { padding-left: 0; border-left: 0; }
-    }
-    @media (max-width: 860px) {
-      .usp ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .usp li:nth-child(3) { border-left: 0; }
-      .usp li:nth-child(n+3) { border-top: 1px solid var(--garis); }
-      .kategori { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .split, .tek-isi, .cerita, .kampanye-isi, .langganan-isi { grid-template-columns: minmax(0, 1fr); }
-      .panel { min-height: 460px; }
-      .tek-foto .stempel { right: 12px; }
-      .cerita-logo { aspect-ratio: 2 / 1; padding: 8%; }
-    }
-    @media (max-width: 600px) {
-      .aksi .akun { display: none; }
-      .logo img { height: 30px; }
-      .hero { min-height: 640px; }
-      .hero > img { object-position: 68% 50%; }
-      .hero::before { background: linear-gradient(0deg, rgba(5,22,15,.92) 10%, rgba(5,22,15,.45) 60%, rgba(5,22,15,.15)); }
-      .hero h1 { font-size: 17vw; }
-      .hero-cta .btn { flex: 1 1 100%; }
-      .usp li { padding: 14px 8px; font-size: 13px; gap: 8px; }
-      .rel { grid-auto-columns: 72%; }
-      .nilai { grid-template-columns: minmax(0, 1fr); }
-      .nilai div, .nilai div + div { padding: 20px 0; border-left: 0; border-bottom: 1px solid var(--garis); }
-      .spek dt { font-size: 28px; }
-      .footer-atas { grid-template-columns: minmax(0, 1fr); }
-    }
-  </style>
+  <link rel="stylesheet" href="assets/css/style.css?v=2">
 </head>
-<body>
+<body data-halaman="beranda">
 
   <a class="sr-only" href="#konten">Lewati ke konten</a>
 
@@ -313,7 +27,7 @@
     <div class="wrap">
       <span>Gratis ongkir ke seluruh Indonesia untuk belanja di atas Rp750.000</span>
       <span class="titik" aria-hidden="true">●</span>
-      <span>Baru: <a href="#xpdic">XPDIC 2 sudah rilis</a></span>
+      <span>Baru: <a href="produk.html?id=xpdic-2-mid">XPDIC 2 sudah rilis</a></span>
     </div>
   </div>
 
@@ -323,7 +37,7 @@
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
       </button>
 
-      <a href="#beranda" class="logo"><img src="assets/images/logo-green.png" alt="RIMBA, Beyond the Trail" width="824" height="200"></a>
+      <a href="index.html" class="logo"><img src="assets/images/logo-green.png" alt="RIMBA, Beyond the Trail" width="824" height="200"></a>
 
       <nav aria-label="Navigasi utama">
         <ul class="menu">
@@ -334,29 +48,29 @@
                 <div>
                   <h3>Sepatu Hiking</h3>
                   <ul>
-                    <li><a href="#xpdic">XPDIC 2 Mid</a></li>
-                    <li><a href="#produk">Trail Running</a></li>
-                    <li><a href="#produk">Sandal Gunung</a></li>
-                    <li><a href="#produk">Semua Sepatu</a></li>
+                    <li><a href="produk.html?id=xpdic-2-mid">XPDIC 2 Mid</a></li>
+                    <li><a href="produk.html?id=xpdic-2-low">XPDIC 2 Low</a></li>
+                    <li><a href="koleksi.html?kat=sepatu">Sandal Gunung</a></li>
+                    <li><a href="koleksi.html?kat=sepatu">Semua Sepatu</a></li>
                   </ul>
                 </div>
                 <div>
                   <h3>Aksesori</h3>
                   <ul>
-                    <li><a href="#produk">Kaos Kaki Wol</a></li>
-                    <li><a href="#produk">Gaiter</a></li>
-                    <li><a href="#produk">Tali Cadangan</a></li>
+                    <li><a href="koleksi.html?kat=sepatu">Kaos Kaki Wol</a></li>
+                    <li><a href="koleksi.html?kat=sepatu">Gaiter</a></li>
+                    <li><a href="koleksi.html?kat=sepatu">Tali Cadangan</a></li>
                   </ul>
                 </div>
                 <div>
                   <h3>Cari Berdasarkan</h3>
                   <ul>
-                    <li><a href="#produk">Jalur Basah</a></li>
-                    <li><a href="#produk">Jalur Berbatu</a></li>
-                    <li><a href="#produk">Pendakian Harian</a></li>
+                    <li><a href="koleksi.html?kat=sepatu">Jalur Basah</a></li>
+                    <li><a href="koleksi.html?kat=sepatu">Jalur Berbatu</a></li>
+                    <li><a href="koleksi.html?kat=sepatu">Pendakian Harian</a></li>
                   </ul>
                 </div>
-                <a href="#xpdic" class="mega-promo">
+                <a href="produk.html?id=xpdic-2-mid" class="mega-promo">
                   <img src="assets/images/xpdic2.jpg" alt="" loading="lazy">
                   <span>Kenalan dengan XPDIC 2</span>
                 </a>
@@ -370,26 +84,26 @@
                 <div>
                   <h3>Jaket</h3>
                   <ul>
-                    <li><a href="#produk">Jaket Kabut</a></li>
-                    <li><a href="#produk">Windbreaker</a></li>
-                    <li><a href="#produk">Fleece</a></li>
+                    <li><a href="produk.html?id=jaket-kabut">Jaket Kabut</a></li>
+                    <li><a href="koleksi.html?kat=pakaian">Windbreaker</a></li>
+                    <li><a href="koleksi.html?kat=pakaian">Fleece</a></li>
                   </ul>
                 </div>
                 <div>
                   <h3>Atasan</h3>
                   <ul>
-                    <li><a href="#produk">Kaos Quick Dry</a></li>
-                    <li><a href="#produk">Kemeja Lapangan</a></li>
+                    <li><a href="koleksi.html?kat=pakaian">Kaos Quick Dry</a></li>
+                    <li><a href="koleksi.html?kat=pakaian">Kemeja Lapangan</a></li>
                   </ul>
                 </div>
                 <div>
                   <h3>Bawahan</h3>
                   <ul>
-                    <li><a href="#produk">Celana Gunung</a></li>
-                    <li><a href="#produk">Celana Pendek</a></li>
+                    <li><a href="koleksi.html?kat=pakaian">Celana Gunung</a></li>
+                    <li><a href="koleksi.html?kat=pakaian">Celana Pendek</a></li>
                   </ul>
                 </div>
-                <a href="#produk" class="mega-promo">
+                <a href="produk.html?id=jaket-kabut" class="mega-promo">
                   <img src="assets/images/jacket.jpg" alt="" loading="lazy">
                   <span>Tahan gerimis, ringan dibawa</span>
                 </a>
@@ -403,35 +117,35 @@
                 <div>
                   <h3>Tas</h3>
                   <ul>
-                    <li><a href="#produk">Carrier Lembah 45L</a></li>
-                    <li><a href="#produk">Daypack</a></li>
-                    <li><a href="#produk">Cover Hujan</a></li>
+                    <li><a href="produk.html?id=carrier-lembah-45">Carrier Lembah 45L</a></li>
+                    <li><a href="koleksi.html?kat=tas">Daypack</a></li>
+                    <li><a href="koleksi.html?kat=tas">Cover Hujan</a></li>
                   </ul>
                 </div>
                 <div>
                   <h3>Berkemah</h3>
                   <ul>
-                    <li><a href="#produk">Tenda Ranu 2P</a></li>
-                    <li><a href="#produk">Matras</a></li>
-                    <li><a href="#produk">Sleeping Bag</a></li>
+                    <li><a href="produk.html?id=tenda-ranu-2p">Tenda Ranu 2P</a></li>
+                    <li><a href="koleksi.html?kat=tenda">Matras</a></li>
+                    <li><a href="koleksi.html?kat=tenda">Sleeping Bag</a></li>
                   </ul>
                 </div>
                 <div>
                   <h3>Lainnya</h3>
                   <ul>
-                    <li><a href="#produk">Headlamp</a></li>
-                    <li><a href="#produk">Botol Minum</a></li>
+                    <li><a href="koleksi.html?kat=tas">Headlamp</a></li>
+                    <li><a href="koleksi.html?kat=tas">Botol Minum</a></li>
                   </ul>
                 </div>
-                <a href="#produk" class="mega-promo">
+                <a href="produk.html?id=tenda-ranu-2p" class="mega-promo">
                   <img src="assets/images/kat-tenda.jpg" alt="" loading="lazy">
                   <span>Berkemah di atas awan</span>
                 </a>
               </div>
             </div>
           </li>
-          <li><a href="#kampanye">Kampanye</a></li>
-          <li><a href="#cerita">Cerita Kami</a></li>
+          <li><a href="koleksi.html">Semua Produk</a></li>
+          <li><a href="index.html#cerita">Cerita Kami</a></li>
         </ul>
       </nav>
 
@@ -439,10 +153,10 @@
         <button class="ikon-btn" id="tombol-cari" aria-label="Cari produk" aria-expanded="false" aria-controls="cari">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
         </button>
-        <a class="ikon-btn akun" href="#langganan" aria-label="Akun">
+        <a class="ikon-btn akun" href="index.html#langganan" aria-label="Akun">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>
         </a>
-        <button class="ikon-btn" aria-label="Keranjang" id="tombol-keranjang">
+        <button class="ikon-btn" aria-label="Buka keranjang" id="tombol-keranjang" aria-controls="keranjang">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
           <span class="jumlah" id="jumlah-keranjang" hidden>0</span>
         </button>
@@ -450,9 +164,9 @@
     </div>
 
     <div class="cari" id="cari">
-      <form class="wrap" role="search" onsubmit="event.preventDefault()">
+      <form class="wrap" role="search" action="koleksi.html" method="get">
         <label for="input-cari" class="sr-only">Cari produk</label>
-        <input id="input-cari" type="search" placeholder="Cari sepatu, jaket, carrier, tenda…">
+        <input id="input-cari" name="q" type="search" placeholder="Cari sepatu, jaket, carrier, tenda…">
         <button class="btn btn-gelap" type="submit">Cari</button>
       </form>
     </div>
@@ -469,17 +183,18 @@
         </button>
       </div>
       <details><summary>Sepatu</summary>
-        <ul><li><a href="#xpdic" data-tutup>XPDIC 2 Mid</a></li><li><a href="#produk" data-tutup>Trail Running</a></li><li><a href="#produk" data-tutup>Sandal Gunung</a></li><li><a href="#produk" data-tutup>Aksesori</a></li></ul>
+        <ul><li><a href="produk.html?id=xpdic-2-mid">XPDIC 2 Mid</a></li><li><a href="produk.html?id=xpdic-2-low">XPDIC 2 Low</a></li><li><a href="koleksi.html?kat=sepatu">Semua Sepatu</a></li></ul>
       </details>
       <details><summary>Pakaian</summary>
-        <ul><li><a href="#produk" data-tutup>Jaket</a></li><li><a href="#produk" data-tutup>Atasan</a></li><li><a href="#produk" data-tutup>Bawahan</a></li></ul>
+        <ul><li><a href="produk.html?id=jaket-kabut">Jaket Kabut</a></li><li><a href="koleksi.html?kat=pakaian">Semua Pakaian</a></li></ul>
       </details>
       <details><summary>Perlengkapan</summary>
-        <ul><li><a href="#produk" data-tutup>Tas & Carrier</a></li><li><a href="#produk" data-tutup>Tenda</a></li><li><a href="#produk" data-tutup>Lainnya</a></li></ul>
+        <ul><li><a href="produk.html?id=carrier-lembah-45">Carrier Lembah 45L</a></li><li><a href="produk.html?id=tenda-ranu-2p">Tenda Ranu 2P</a></li><li><a href="koleksi.html?kat=tas">Tas & Carrier</a></li><li><a href="koleksi.html?kat=tenda">Tenda</a></li></ul>
       </details>
-      <a class="drawer-link" href="#kampanye" data-tutup>Kampanye</a>
-      <a class="drawer-link" href="#cerita" data-tutup>Cerita Kami</a>
-      <a class="drawer-link" href="#langganan" data-tutup>Kabar Jalur</a>
+      <a class="drawer-link" href="koleksi.html">Semua Produk</a>
+      <a class="drawer-link" href="index.html#kampanye" data-tutup>Kampanye</a>
+      <a class="drawer-link" href="index.html#cerita" data-tutup>Cerita Kami</a>
+      <a class="drawer-link" href="index.html#langganan" data-tutup>Kabar Jalur</a>
     </div>
   </div>
 
@@ -492,7 +207,7 @@
         <h1 class="judul" id="hero-judul">Jelajah untuk yang <em>Tangguh!</em></h1>
         <p class="lead">Tanah becek, akar licin, hujan yang datang tiba-tiba. Sepatu yang tetap bisa diandalkan di jalur tropis Indonesia.</p>
         <div class="hero-cta">
-          <a href="#xpdic" class="btn btn-putih">Belanja XPDIC 2</a>
+          <a href="produk.html?id=xpdic-2-mid" class="btn btn-putih">Belanja XPDIC 2</a>
           <a href="#kampanye" class="btn btn-garis-putih">Lihat Kampanye</a>
         </div>
       </div>
@@ -514,19 +229,19 @@
         <h2 class="judul" id="kat-judul">Belanja per kategori</h2>
       </div>
       <div class="kategori">
-        <a class="kat" href="#produk">
+        <a class="kat" href="koleksi.html?kat=sepatu">
           <img src="assets/images/xpdic2.jpg" alt="" loading="lazy" style="object-position: 30% 50%">
           <span>Sepatu <span aria-hidden="true">→</span></span>
         </a>
-        <a class="kat" href="#produk">
+        <a class="kat" href="koleksi.html?kat=pakaian">
           <img src="assets/images/jacket.jpg" alt="" loading="lazy" style="object-position: 40% 50%">
           <span>Jaket <span aria-hidden="true">→</span></span>
         </a>
-        <a class="kat" href="#produk">
+        <a class="kat" href="koleksi.html?kat=tas">
           <img src="assets/images/kat-carrier.jpg" alt="" loading="lazy">
           <span>Carrier <span aria-hidden="true">→</span></span>
         </a>
-        <a class="kat" href="#produk">
+        <a class="kat" href="koleksi.html?kat=tenda">
           <img src="assets/images/kat-tenda.jpg" alt="" loading="lazy" style="object-position: 30% 50%">
           <span>Tenda <span aria-hidden="true">→</span></span>
         </a>
@@ -537,7 +252,6 @@
     <section class="wrap seksi" id="produk" aria-labelledby="produk-judul" style="padding-top: 0">
       <div class="seksi-kepala">
         <div>
-          <p class="eyebrow" style="color: var(--oranye-teks)">Koleksi 2026</p>
           <h2 class="judul" id="produk-judul">Paling dicari pendaki</h2>
         </div>
         <div class="rel-kontrol">
@@ -546,75 +260,8 @@
         </div>
       </div>
 
-      <div class="rel" id="rel">
-        <article class="produk">
-          <div class="produk-foto">
-            <img src="assets/images/xpdic2.jpg" alt="Sepatu XPDIC 2" loading="lazy">
-            <span class="badge oranye">Baru</span>
-            <button class="suka" type="button" aria-pressed="false" aria-label="Simpan RIMBA XPDIC 2"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg></button>
-          </div>
-          <div class="produk-isi">
-            <div class="warna" aria-label="3 pilihan warna"><i style="background:#4A4F4C"></i><i style="background:#135D46"></i><i style="background:#8A5A35"></i></div>
-            <h3><a href="#xpdic">RIMBA XPDIC 2 Mid</a></h3>
-            <p class="produk-kat">Sepatu hiking · Unisex</p>
-            <p class="harga">Rp1.249.000</p>
-          </div>
-        </article>
-
-        <article class="produk">
-          <div class="produk-foto">
-            <img src="assets/images/produk-jaket.jpg" alt="Jaket Kabut warna cokelat tanah dengan ritsleting oranye" loading="lazy">
-            <button class="suka" type="button" aria-pressed="false" aria-label="Simpan Jaket Kabut"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg></button>
-          </div>
-          <div class="produk-isi">
-            <div class="warna" aria-label="2 pilihan warna"><i style="background:#4E4741"></i><i style="background:#0C3A2C"></i></div>
-            <h3><a href="#produk">Jaket Kabut</a></h3>
-            <p class="produk-kat">Jaket 2 lapis · Tahan gerimis</p>
-            <p class="harga">Rp899.000</p>
-          </div>
-        </article>
-
-        <article class="produk">
-          <div class="produk-foto">
-            <img src="assets/images/produk-carrier.jpg" alt="Carrier Lembah 45L warna hijau hutan dengan aksen oranye" loading="lazy">
-            <span class="badge">Terlaris</span>
-            <button class="suka" type="button" aria-pressed="false" aria-label="Simpan Carrier Lembah 45L"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg></button>
-          </div>
-          <div class="produk-isi">
-            <div class="warna" aria-label="2 pilihan warna"><i style="background:#135D46"></i><i style="background:#2B2B2B"></i></div>
-            <h3><a href="#produk">Carrier Lembah 45L</a></h3>
-            <p class="produk-kat">Tas carrier · Cover hujan bawaan</p>
-            <p class="harga">Rp1.149.000</p>
-          </div>
-        </article>
-
-        <article class="produk">
-          <div class="produk-foto">
-            <img src="assets/images/produk-tenda.jpg" alt="Tenda Ranu 2P oranye dan hijau" loading="lazy">
-            <button class="suka" type="button" aria-pressed="false" aria-label="Simpan Tenda Ranu 2P"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg></button>
-          </div>
-          <div class="produk-isi">
-            <div class="warna" aria-label="2 pilihan warna"><i style="background:#E8692A"></i><i style="background:#135D46"></i></div>
-            <h3><a href="#produk">Tenda Ranu 2P</a></h3>
-            <p class="produk-kat">Tenda 2 orang · Berdiri 6 menit</p>
-            <p class="harga">Rp1.689.000</p>
-          </div>
-        </article>
-
-        <article class="produk">
-          <div class="produk-foto">
-            <img src="assets/images/produk-xpdic-low.jpg" alt="Sepatu trail XPDIC 2 Low tampak samping" loading="lazy">
-            <button class="suka" type="button" aria-pressed="false" aria-label="Simpan XPDIC 2 Low"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg></button>
-            <span class="badge">Segera</span>
-          </div>
-          <div class="produk-isi">
-            <div class="warna" aria-label="1 pilihan warna"><i style="background:#4A4F4C"></i></div>
-            <h3><a href="#xpdic">RIMBA XPDIC 2 Low</a></h3>
-            <p class="produk-kat">Sepatu trail · Unisex</p>
-            <p class="harga">Rp1.099.000</p>
-          </div>
-        </article>
-      </div>
+      <div class="rel" id="rel"></div>
+      <p style="margin:28px 0 0"><a class="tautan" href="koleksi.html">Lihat semua produk</a></p>
     </section>
 
     <!-- Editorial split -->
@@ -629,7 +276,7 @@
             <span class="btn btn-putih">Lihat cerita</span>
           </div>
         </a>
-        <a class="panel" href="#produk">
+        <a class="panel" href="produk.html?id=jaket-kabut">
           <img src="assets/images/jacket.jpg" alt="" loading="lazy">
           <div class="panel-isi">
             <p class="eyebrow">Musim hujan</p>
@@ -660,19 +307,10 @@
             <div><dt>Tali stabilo</dt><dd>Hijau terang, gampang dicek saat gelap</dd></div>
           </dl>
 
-          <fieldset>
-            <legend>Pilih ukuran</legend>
-            <div class="ukuran" id="ukuran">
-              <button type="button" aria-pressed="false">39</button>
-              <button type="button" aria-pressed="false">40</button>
-              <button type="button" aria-pressed="false">41</button>
-              <button type="button" aria-pressed="false">42</button>
-              <button type="button" aria-pressed="false">43</button>
-              <button type="button" aria-pressed="false">44</button>
-            </div>
-          </fieldset>
-          <p class="ukuran-info" id="ukuran-info" aria-live="polite">Kalau ragu, ambil satu nomor lebih besar untuk kaos kaki tebal.</p>
-          <button type="button" class="btn btn-oranye" id="tambah-keranjang">Masukkan ke keranjang</button>
+          <div class="hero-cta">
+            <a href="produk.html?id=xpdic-2-mid" class="btn btn-oranye">Pilih ukuran & beli</a>
+            <a href="produk.html?id=xpdic-2-low" class="btn btn-garis-putih">Lihat versi Low</a>
+          </div>
         </div>
       </div>
     </section>
@@ -720,11 +358,10 @@
     <section class="kampanye seksi" id="kampanye" aria-labelledby="kampanye-judul">
       <div class="wrap kampanye-isi">
         <div>
-          <p class="eyebrow">Kampanye 2026</p>
           <h2 class="judul" id="kampanye-judul">Jelajah untuk yang Tangguh</h2>
           <p>Sepasang sepatu yang belum dicuci setelah turun gunung. Lumpur di sol, debu di mesh. Buat kami, itu tanda sepatunya sudah bekerja.</p>
           <p>Kami ingin orang melihat XPDIC 2 di tempat aslinya: di jalur hutan, bukan di etalase.</p>
-          <a href="#xpdic" class="btn btn-gelap">Belanja XPDIC 2</a>
+          <a href="produk.html?id=xpdic-2-mid" class="btn btn-gelap">Belanja XPDIC 2</a>
         </div>
         <img src="assets/images/poster-kampanye.jpg" alt="Poster kampanye RIMBA: Jelajah untuk yang Tangguh, sepatu XPDIC 2 di hutan" loading="lazy" width="1080" height="1350">
       </div>
@@ -753,26 +390,26 @@
         <img src="assets/images/logo-white.png" alt="RIMBA, Beyond the Trail" width="824" height="200">
         <p style="margin: 18px 0 0; max-width: 300px">Perlengkapan outdoor untuk jalur tropis Indonesia.</p>
         <div class="sosmed">
-          <a href="#beranda" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
-          <a href="#beranda" aria-label="TikTok"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 3v11a4 4 0 1 1-4-4"/><path d="M14 3c.5 3 2.5 5 6 5"/></svg></a>
-          <a href="#beranda" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z" fill="currentColor"/></svg></a>
+          <a href="index.html" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+          <a href="index.html" aria-label="TikTok"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 3v11a4 4 0 1 1-4-4"/><path d="M14 3c.5 3 2.5 5 6 5"/></svg></a>
+          <a href="index.html" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z" fill="currentColor"/></svg></a>
         </div>
       </div>
       <div>
         <h3>Belanja</h3>
-        <ul><li><a href="#produk">Sepatu</a></li><li><a href="#produk">Jaket</a></li><li><a href="#produk">Carrier</a></li><li><a href="#produk">Tenda</a></li></ul>
+        <ul><li><a href="koleksi.html?kat=sepatu">Sepatu</a></li><li><a href="koleksi.html?kat=pakaian">Pakaian</a></li><li><a href="koleksi.html?kat=tas">Tas & Carrier</a></li><li><a href="koleksi.html?kat=tenda">Tenda</a></li></ul>
       </div>
       <div>
         <h3>Bantuan</h3>
-        <ul><li><a href="#beranda">Panduan ukuran</a></li><li><a href="#beranda">Pengiriman</a></li><li><a href="#beranda">Retur & garansi</a></li><li><a href="#beranda">Hubungi kami</a></li></ul>
+        <ul><li><a href="index.html">Panduan ukuran</a></li><li><a href="index.html">Pengiriman</a></li><li><a href="index.html">Retur & garansi</a></li><li><a href="index.html">Hubungi kami</a></li></ul>
       </div>
       <div>
         <h3>RIMBA</h3>
-        <ul><li><a href="#cerita">Cerita kami</a></li><li><a href="#kampanye">Kampanye</a></li><li><a href="#langganan">Kabar Jalur</a></li></ul>
+        <ul><li><a href="index.html#cerita">Cerita kami</a></li><li><a href="index.html#kampanye">Kampanye</a></li><li><a href="index.html#langganan">Kabar Jalur</a></li></ul>
       </div>
       <div>
         <h3>Toko</h3>
-        <ul><li><a href="#beranda">rimbaoutdoor.com</a></li><li><a href="#beranda">Cari toko</a></li></ul>
+        <ul><li><a href="index.html">rimbaoutdoor.com</a></li><li><a href="index.html">Cari toko</a></li></ul>
       </div>
     </div>
     <div class="wrap footer-bawah">
@@ -781,95 +418,29 @@
     </div>
   </footer>
 
+  <!-- Keranjang -->
+  <div class="keranjang" id="keranjang" aria-hidden="true">
+    <div class="drawer-latar" data-tutup-k></div>
+    <div class="keranjang-panel" role="dialog" aria-label="Keranjang belanja">
+      <div class="k-atas">
+        <h2>Keranjang</h2>
+        <button class="ikon-btn" type="button" data-tutup-k aria-label="Tutup keranjang">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <div class="k-ongkir"><span id="k-ongkir-teks"></span><div class="k-bar"><i id="k-bar"></i></div></div>
+      <ul class="k-daftar" id="k-daftar"></ul>
+      <div class="k-bawah" id="k-bawah">
+        <div class="k-total"><span>Subtotal</span><span id="k-total">Rp0</span></div>
+        <small>Ongkir dihitung saat checkout.</small>
+        <button type="button" class="btn btn-gelap" id="k-checkout">Checkout</button>
+      </div>
+    </div>
+  </div>
+
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script>
-    (function () {
-      var toast = document.getElementById('toast'), t;
-      function kabar(teks) {
-        toast.textContent = teks; toast.classList.add('tampil');
-        clearTimeout(t); t = setTimeout(function () { toast.classList.remove('tampil'); }, 2600);
-      }
-
-      // Mega menu: dukung klik & keyboard
-      document.querySelectorAll('.menu > li > button').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          var li = btn.parentElement, buka = !li.classList.contains('buka');
-          document.querySelectorAll('.menu > li.buka').forEach(function (x) { x.classList.remove('buka'); x.firstElementChild.setAttribute('aria-expanded', 'false'); });
-          li.classList.toggle('buka', buka); btn.setAttribute('aria-expanded', String(buka));
-        });
-      });
-      document.querySelectorAll('.menu > li').forEach(function (li) {
-        li.addEventListener('mouseleave', function () { if (li.classList.contains('buka')) { li.classList.remove('buka'); li.firstElementChild.setAttribute('aria-expanded', 'false'); } });
-      });
-      document.querySelectorAll('.mega a').forEach(function (a) {
-        a.addEventListener('click', function () {
-          var li = a.closest('li.buka') || a.closest('.menu > li');
-          if (li) { li.classList.remove('buka'); li.firstElementChild.blur(); }
-          document.activeElement && document.activeElement.blur();
-        });
-      });
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') { document.querySelectorAll('.menu > li.buka').forEach(function (x) { x.classList.remove('buka'); }); tutupDrawer(); }
-      });
-
-      // Pencarian
-      var tCari = document.getElementById('tombol-cari'), cari = document.getElementById('cari');
-      tCari.addEventListener('click', function () {
-        var buka = cari.classList.toggle('buka'); tCari.setAttribute('aria-expanded', String(buka));
-        if (buka) document.getElementById('input-cari').focus();
-      });
-
-      // Drawer mobile
-      var drawer = document.getElementById('drawer'), bukaMenu = document.getElementById('buka-menu');
-      function tutupDrawer() { drawer.classList.remove('buka'); drawer.setAttribute('aria-hidden', 'true'); bukaMenu.setAttribute('aria-expanded', 'false'); document.body.classList.remove('kunci'); }
-      bukaMenu.addEventListener('click', function () { drawer.classList.add('buka'); drawer.setAttribute('aria-hidden', 'false'); bukaMenu.setAttribute('aria-expanded', 'true'); document.body.classList.add('kunci'); });
-      drawer.querySelectorAll('[data-tutup]').forEach(function (el) { el.addEventListener('click', tutupDrawer); });
-
-      // Rel produk
-      var rel = document.getElementById('rel'), kiri = document.getElementById('rel-kiri'), kanan = document.getElementById('rel-kanan');
-      function langkah() { var p = rel.querySelector('.produk'); return p ? p.getBoundingClientRect().width + 16 : 300; }
-      function cekRel() { kiri.disabled = rel.scrollLeft < 4; kanan.disabled = rel.scrollLeft + rel.clientWidth >= rel.scrollWidth - 4; }
-      kiri.addEventListener('click', function () { rel.scrollBy({ left: -langkah(), behavior: 'smooth' }); });
-      kanan.addEventListener('click', function () { rel.scrollBy({ left: langkah(), behavior: 'smooth' }); });
-      rel.addEventListener('scroll', cekRel, { passive: true }); window.addEventListener('resize', cekRel); cekRel();
-
-      // Simpan (wishlist)
-      document.querySelectorAll('.suka').forEach(function (b) {
-        b.addEventListener('click', function () {
-          var on = b.getAttribute('aria-pressed') !== 'true'; b.setAttribute('aria-pressed', String(on));
-          kabar(on ? 'Disimpan ke favorit' : 'Dihapus dari favorit');
-        });
-      });
-
-      // Pilih ukuran & keranjang
-      var box = document.getElementById('ukuran'), info = document.getElementById('ukuran-info'), ukuran = null;
-      box.addEventListener('click', function (e) {
-        var btn = e.target.closest('button'); if (!btn) return;
-        box.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
-        btn.setAttribute('aria-pressed', 'true'); ukuran = btn.textContent;
-        info.textContent = 'Ukuran ' + ukuran + ' dipilih.';
-      });
-      var jumlah = 0, badge = document.getElementById('jumlah-keranjang');
-      document.getElementById('tambah-keranjang').addEventListener('click', function () {
-        if (!ukuran) { info.textContent = 'Pilih ukuran dulu ya.'; box.querySelector('button').focus(); return; }
-        jumlah++; badge.textContent = jumlah; badge.hidden = false;
-        kabar('XPDIC 2 ukuran ' + ukuran + ' masuk keranjang');
-      });
-      document.getElementById('tombol-keranjang').addEventListener('click', function () {
-        kabar(jumlah ? 'Ada ' + jumlah + ' barang di keranjang' : 'Keranjang masih kosong');
-      });
-
-      // Form langganan (tampilan saja)
-      var form = document.getElementById('form-email'), input = document.getElementById('email'), pesan = document.getElementById('form-pesan');
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        var val = input.value.trim();
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) { pesan.textContent = 'Format email belum benar. Contoh: nama@email.com'; input.focus(); return; }
-        pesan.textContent = 'Terima kasih! ' + val + ' sudah masuk daftar Kabar Jalur.';
-        form.reset();
-      });
-    })();
-  </script>
+  <script src="assets/js/data.js?v=2"></script>
+  <script src="assets/js/app.js?v=2"></script>
 </body>
 </html>
