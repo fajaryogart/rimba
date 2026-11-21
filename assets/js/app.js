@@ -86,7 +86,7 @@
     daftar.innerHTML = keranjang.map(function (it, i) {
       var p = window.cariProduk(it.id); if (!p) return '';
       return '<li class="k-item">' +
-        '<a href="produk.html?id=' + p.id + '"><img src="' + IMG + p.foto[0] + '" alt=""></a>' +
+        '<a href="produk.html?id=' + p.id + '"><img src="' + IMG + window.fotoWarna(p, it.warna)[0] + '" alt=""></a>' +
         '<div><h3><a href="produk.html?id=' + p.id + '">' + esc(p.nama) + '</a></h3>' +
         '<p class="var">' + esc(it.warna) + ' · ' + esc(it.ukuran) + '</p>' +
         '<div class="qty"><button type="button" data-k-kurang="' + i + '" aria-label="Kurangi">−</button><span>' + it.qty + '</span><button type="button" data-k-tambah="' + i + '" aria-label="Tambah">+</button></div></div>' +
@@ -128,14 +128,27 @@
   function kartu(p) {
     var badge = p.badge ? '<span class="badge' + (p.badge === 'Baru' ? ' oranye' : '') + '">' + esc(p.badge) + '</span>' : '';
     return '<article class="produk">' +
-      '<div class="produk-foto"><img src="' + IMG + p.foto[0] + '" alt="' + esc(p.nama) + '" loading="lazy">' + badge +
+      '<div class="produk-foto"><img src="' + IMG + p.warna[0].foto[0] + '" data-asli="' + IMG + p.warna[0].foto[0] + '" alt="' + esc(p.nama) + '" loading="lazy">' + badge +
       '<button class="suka" type="button" data-fav="' + p.id + '" aria-pressed="' + isFav(p.id) + '" aria-label="Simpan ' + esc(p.nama) + '">' + ikonHati + '</button></div>' +
       '<div class="produk-isi"><div class="warna" aria-label="' + p.warna.length + ' pilihan warna">' +
-      p.warna.map(function (w) { return '<i style="background:' + w.hex + '" title="' + esc(w.nama) + '"></i>'; }).join('') + '</div>' +
+      p.warna.map(function (w, i) { return '<i style="background:' + w.hex + '" title="' + esc(w.nama) + '" data-img="' + IMG + w.foto[0] + '" data-href="produk.html?id=' + p.id + (i ? '&warna=' + i : '') + '"></i>'; }).join('') + '</div>' +
       '<h3><a href="produk.html?id=' + p.id + '">' + esc(p.nama) + '</a></h3>' +
       '<p class="produk-kat">' + esc(p.sub) + '</p><p class="harga">' + rp(p.harga) + '</p></div></article>';
   }
   function urutRekomendasi(a, b) { return a.urutan - b.urutan; }
+
+  // Arahkan kursor ke titik warna di kartu: foto ikut berganti
+  document.addEventListener('mouseover', function (e) {
+    var i = e.target.closest('.produk .warna i'); if (!i) return;
+    var img = i.closest('.produk').querySelector('.produk-foto img'); img.src = i.getAttribute('data-img');
+  });
+  document.addEventListener('click', function (e) {
+    var i = e.target.closest('.produk .warna i'); if (i) location.href = i.getAttribute('data-href');
+  });
+  document.addEventListener('mouseout', function (e) {
+    var card = e.target.closest('.produk'); if (!card || card.contains(e.relatedTarget)) return;
+    var img = card.querySelector('.produk-foto img'); if (img && img.getAttribute('data-asli')) img.src = img.getAttribute('data-asli');
+  });
 
   /* ---------- Beranda ---------- */
   if (halaman === 'beranda') {
@@ -202,16 +215,17 @@
       return;
     }
     document.title = p.nama + ' | RIMBA';
-    var idx = 0, warna = p.warna[0].nama, ukuran = p.ukuran.length === 1 ? p.ukuran[0] : null, qty = 1;
+    var qWarna = +new URLSearchParams(location.search).get('warna') || 0;
+    var idx = 0, warna = (p.warna[qWarna] || p.warna[0]).nama, foto = window.fotoWarna(p, warna), ukuran = p.ukuran.length === 1 ? p.ukuran[0] : null, qty = 1;
     var satuUkuran = p.ukuran.length === 1;
     var ikonPanah = function (d) { return '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="' + d + '"/></svg>'; };
     wadah.innerHTML =
       '<ol class="remah" style="padding-top:0;grid-column:1/-1"><li><a href="index.html">Beranda</a></li><li><a href="koleksi.html?kat=' + p.kategori + '">' + esc(K[p.kategori].nama) + '</a></li><li>' + esc(p.nama) + '</li></ol>' +
       '<div class="galeri">' +
-        '<div class="thumb" role="group" aria-label="Pilih foto">' + p.foto.map(function (f, i) { return '<button type="button" data-foto="' + i + '" aria-label="Foto ' + (i + 1) + '"><img src="' + IMG + f + '" alt=""></button>'; }).join('') + '</div>' +
+        '<div class="thumb" id="thumb" role="group" aria-label="Pilih foto"></div>' +
         '<div class="galeri-utama">' + (p.badge ? '<span class="badge' + (p.badge === 'Baru' ? ' oranye' : '') + '">' + esc(p.badge) + '</span>' : '') +
-          '<img id="foto-utama" src="' + IMG + p.foto[0] + '" alt="' + esc(p.nama) + '">' +
-          (p.foto.length > 1 ? '<button class="galeri-nav kiri" type="button" data-geser="-1" aria-label="Foto sebelumnya">' + ikonPanah('M15 6l-6 6 6 6') + '</button><button class="galeri-nav kanan" type="button" data-geser="1" aria-label="Foto berikutnya">' + ikonPanah('M9 6l6 6-6 6') + '</button>' : '') +
+          '<img id="foto-utama" src="' + IMG + foto[0] + '" alt="' + esc(p.nama) + '">' +
+          '<button class="galeri-nav kiri" type="button" data-geser="-1" aria-label="Foto sebelumnya">' + ikonPanah('M15 6l-6 6 6 6') + '</button><button class="galeri-nav kanan" type="button" data-geser="1" aria-label="Foto berikutnya">' + ikonPanah('M9 6l6 6-6 6') + '</button>' +
         '</div>' +
       '</div>' +
       '<div class="info">' +
@@ -220,7 +234,7 @@
         '<p class="sub">' + esc(p.sub) + '</p>' +
         '<p class="harga-besar">' + rp(p.harga) + '</p>' +
         '<div class="opsi"><div class="opsi-label"><span>Warna: <b id="nama-warna">' + esc(warna) + '</b></span></div><div class="swatch-baris">' +
-          p.warna.map(function (w, i) { return '<button type="button" class="swatch" style="background:' + w.hex + '" data-warna="' + esc(w.nama) + '" aria-pressed="' + (i === 0) + '" aria-label="' + esc(w.nama) + '"></button>'; }).join('') +
+          p.warna.map(function (w) { return '<button type="button" class="swatch" style="background:' + w.hex + '" data-warna="' + esc(w.nama) + '" aria-pressed="' + (w.nama === warna) + '" aria-label="' + esc(w.nama) + '"></button>'; }).join('') +
         '</div></div>' +
         '<div class="opsi"><div class="opsi-label"><span>' + (satuUkuran ? 'Ukuran' : 'Pilih ukuran') + '</span>' + (p.kategori === 'sepatu' || p.kategori === 'pakaian' ? '<a href="#akordion-ukuran">Panduan ukuran</a>' : '') + '</div><div class="ukuran-grid" id="ukuran-grid">' +
           p.ukuran.map(function (u) { var h = p.habis.indexOf(u) > -1; return '<button type="button" data-ukuran="' + u + '" aria-pressed="' + (satuUkuran) + '"' + (h ? ' disabled aria-label="' + u + ' (habis)"' : '') + '>' + u + '</button>'; }).join('') +
@@ -241,12 +255,17 @@
       '</div>';
 
     var fotoUtama = $('#foto-utama');
+    function renderThumb() {
+      $('#thumb').innerHTML = foto.map(function (f, i) { return '<button type="button" data-foto="' + i + '" aria-label="Foto ' + (i + 1) + '"><img src="' + IMG + f + '" alt=""></button>'; }).join('');
+      $$('.galeri-nav').forEach(function (b) { b.hidden = foto.length < 2; });
+    }
     function setFoto(i) {
-      idx = (i + p.foto.length) % p.foto.length;
-      fotoUtama.src = IMG + p.foto[idx];
+      idx = (i + foto.length) % foto.length;
+      fotoUtama.src = IMG + foto[idx];
+      fotoUtama.alt = p.nama + ' warna ' + warna;
       $$('[data-foto]').forEach(function (b) { b.setAttribute('aria-current', String(+b.getAttribute('data-foto') === idx)); });
     }
-    setFoto(0);
+    renderThumb(); setFoto(0);
     wadah.addEventListener('click', function (e) {
       var b = e.target.closest('button'); if (!b) return;
       if (b.hasAttribute('data-foto')) setFoto(+b.getAttribute('data-foto'));
@@ -255,6 +274,7 @@
         warna = b.getAttribute('data-warna');
         $$('[data-warna]').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
         $('#nama-warna').textContent = warna;
+        foto = window.fotoWarna(p, warna); renderThumb(); setFoto(0);
       } else if (b.hasAttribute('data-ukuran')) {
         ukuran = b.getAttribute('data-ukuran');
         $$('[data-ukuran]').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });

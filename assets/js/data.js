@@ -8,28 +8,27 @@ window.RIMBA_KATEGORI = {
 
 window.RIMBA_PRODUK = [
   {
-    id: 'xpdic-2-mid',
-    nama: 'RIMBA XPDIC 2 Mid',
+    id: 'xpdic-2',
+    nama: 'RIMBA XPDIC 2',
     kategori: 'sepatu',
-    sub: 'Sepatu hiking mid-cut · Unisex',
+    sub: 'Sepatu hiking · Unisex',
     harga: 1249000,
     badge: 'Baru',
     urutan: 1,
-    foto: ['produk-xpdic-mid.jpg', 'xpdic2.jpg'],
     warna: [
-      { nama: 'Abu Batu', hex: '#5A5F5C' },
-      { nama: 'Hijau Hutan', hex: '#135D46' },
-      { nama: 'Cokelat Tanah', hex: '#8A5A35' }
+      { nama: 'Abu Batu', hex: '#5A5F5C', foto: ['xpdic2-abu-samping.jpg', 'xpdic2-abu-pasang.jpg', 'xpdic2.jpg'] },
+      { nama: 'Hijau Hutan', hex: '#135D46', foto: ['xpdic2-hijau-samping.jpg', 'xpdic2-hijau-pasang.jpg'] },
+      { nama: 'Cokelat Tanah', hex: '#8A5A35', foto: ['xpdic2-cokelat-samping.jpg', 'xpdic2-cokelat-pasang.jpg'] }
     ],
     ukuran: ['39', '40', '41', '42', '43', '44', '45'],
     habis: ['45'],
     catatanUkuran: 'Kalau ragu, ambil satu nomor lebih besar untuk kaos kaki tebal.',
     deskripsi: [
       'Nama XPDIC diambil dari kata expedition. Generasi kedua ini dibuat untuk satu tujuan: kaki tetap kering dan tidak tergelincir, bahkan di turunan yang masih basah sisa hujan semalam.',
-      'Potongan mid-cut menjaga pergelangan kaki tetap stabil saat membawa carrier berat.'
+      'Ini sepatu yang sama dengan yang ada di kampanye "Jelajah untuk yang Tangguh": dibuat untuk dipakai kotor.'
     ],
     fitur: ['Gerigi sol karet 5 mm untuk tanah lunak dan lumpur', 'Mesh rapat, cepat kering, kerikil kecil tidak gampang masuk', 'Tali hijau stabilo, gampang dicek saat gelap', 'Pelindung ujung kaki dari karet'],
-    spek: [['Berat', '412 g per sepatu (ukuran 42)'], ['Upper', 'Mesh rapat + overlay sintetis'], ['Sol', 'Karet, gerigi 5 mm'], ['Tinggi', 'Mid-cut'], ['Cocok untuk', 'Pendakian harian & multi-hari']]
+    spek: [['Berat', '412 g per sepatu (ukuran 42)'], ['Upper', 'Mesh rapat + overlay sintetis'], ['Sol', 'Karet, gerigi 5 mm'], ['Tinggi', 'Low-mid'], ['Cocok untuk', 'Pendakian harian & multi-hari']]
   },
   {
     id: 'xpdic-2-low',
@@ -39,8 +38,7 @@ window.RIMBA_PRODUK = [
     harga: 1099000,
     badge: 'Segera',
     urutan: 5,
-    foto: ['produk-xpdic-low.jpg', 'xpdic-low-pasang.jpg'],
-    warna: [{ nama: 'Abu Batu', hex: '#5A5F5C' }],
+    warna: [{ nama: 'Abu Batu', hex: '#5A5F5C', foto: ['xpdic2-low-abu.jpg'] }],
     ukuran: ['39', '40', '41', '42', '43', '44'],
     habis: [],
     catatanUkuran: 'Ukuran pas di kaki. Pilih ukuran yang biasa kamu pakai.',
@@ -58,10 +56,9 @@ window.RIMBA_PRODUK = [
     sub: 'Jaket 2 lapis · Tahan gerimis',
     harga: 899000,
     urutan: 2,
-    foto: ['produk-jaket.jpg', 'jacket.jpg', 'jaket-lipat.jpg'],
     warna: [
-      { nama: 'Cokelat Tanah', hex: '#4E4741' },
-      { nama: 'Hijau Hutan', hex: '#0C3A2C' }
+      { nama: 'Cokelat Tanah', hex: '#4E4741', foto: ['produk-jaket.jpg', 'jaket-lipat.jpg', 'jacket.jpg'] },
+      { nama: 'Hijau Hutan', hex: '#0C3A2C', foto: ['jaket-hijau.jpg', 'jaket-lipat-hijau.jpg'] }
     ],
     ukuran: ['S', 'M', 'L', 'XL'],
     habis: [],
@@ -81,10 +78,9 @@ window.RIMBA_PRODUK = [
     harga: 1149000,
     badge: 'Terlaris',
     urutan: 3,
-    foto: ['produk-carrier.jpg', 'carrier-belakang.jpg', 'kat-carrier.jpg'],
     warna: [
-      { nama: 'Hijau Hutan', hex: '#135D46' },
-      { nama: 'Hitam Arang', hex: '#2B2B2B' }
+      { nama: 'Hijau Hutan', hex: '#135D46', foto: ['produk-carrier.jpg', 'carrier-belakang.jpg', 'kat-carrier.jpg'] },
+      { nama: 'Hitam Arang', hex: '#2B2B2B', foto: ['carrier-hitam.jpg', 'carrier-hitam-belakang.jpg'] }
     ],
     ukuran: ['45L'],
     habis: [],
@@ -103,10 +99,9 @@ window.RIMBA_PRODUK = [
     sub: 'Tenda 2 orang · Berdiri 6 menit',
     harga: 1689000,
     urutan: 4,
-    foto: ['produk-tenda.jpg', 'tenda-dalam.jpg', 'kat-tenda.jpg'],
     warna: [
-      { nama: 'Oranye Api', hex: '#E8692A' },
-      { nama: 'Hijau Hutan', hex: '#135D46' }
+      { nama: 'Oranye Api', hex: '#E8692A', foto: ['produk-tenda.jpg', 'tenda-dalam.jpg', 'kat-tenda.jpg'] },
+      { nama: 'Hijau Hutan', hex: '#135D46', foto: ['tenda-hijau.jpg', 'tenda-dalam-hijau.jpg'] }
     ],
     ukuran: ['2 orang'],
     habis: [],
@@ -121,4 +116,11 @@ window.RIMBA_PRODUK = [
 ];
 
 window.rupiah = function (n) { return 'Rp' + n.toLocaleString('id-ID'); };
-window.cariProduk = function (id) { return window.RIMBA_PRODUK.find(function (p) { return p.id === id; }); };
+window.cariProduk = function (id) {
+  if (id === 'xpdic-2-mid') id = 'xpdic-2'; // tautan lama
+  return window.RIMBA_PRODUK.find(function (p) { return p.id === id; });
+};
+window.fotoWarna = function (p, namaWarna) {
+  var w = p.warna.find(function (x) { return x.nama === namaWarna; }) || p.warna[0];
+  return w.foto;
+};
