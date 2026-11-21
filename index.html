@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RIMBA | Beyond the Trail</title>
+  <meta name="description" content="RIMBA, perlengkapan outdoor untuk jalur tropis Indonesia. Sepatu hiking XPDIC 2, jaket, carrier, dan tenda.">
+  <meta name="theme-color" content="#0C3A2C">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <meta property="og:title" content="RIMBA | Beyond the Trail">
+  <meta property="og:description" content="Perlengkapan outdoor untuk jalur tropis Indonesia.">
+  <meta property="og:image" content="assets/images/og-image.jpg">
+  <meta property="og:type" content="website">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;1,800&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --hutan: #0C3A2C;
+      --hutan-gelap: #082B20;
+      --hijau: #135D46;
+      --hijau-muda: #E4EBE6;
+      --oranye: #E8692A;
+      --oranye-tombol: #C24E18;
+      --oranye-teks: #A9410F;
+      --tanah: #F3F1EA;
+      --teks: #18201C;
+      --teks-2: #4A544F;
+      --display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+      --body: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    body { margin: 0; font-family: var(--body); color: var(--teks); background: var(--tanah); line-height: 1.6; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: var(--hijau); }
+    :focus-visible { outline: 3px solid var(--oranye); outline-offset: 3px; }
+
+    .wrap { max-width: 1240px; margin: 0 auto; padding-inline: 24px; }
+    .eyebrow { margin: 0 0 10px; font-size: 13px; font-weight: 700; letter-spacing: .28em; color: var(--oranye-teks); }
+    .h2 { margin: 0; font-family: var(--display); font-weight: 700; font-size: clamp(40px, 5vw, 56px); line-height: 1.02; color: var(--hutan); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 28px; border-radius: 6px; font-weight: 700; font-size: 16px; text-decoration: none; border: 2px solid transparent; cursor: pointer; font-family: inherit; }
+    .btn-oranye { background: var(--oranye-tombol); color: #fff; }
+    .btn-oranye:hover { background: #A9410F; color: #fff; }
+    .btn-garis { border-color: #9CC7B6; color: #fff; }
+    .btn-garis:hover { background: rgba(255,255,255,.08); color: #fff; }
+
+    /* Header & hero */
+    .hero { background: var(--hutan); color: #fff; }
+    .nav { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding-block: 22px; }
+    .nav img { height: 44px; width: auto; }
+    .nav-links { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 28px; font-size: 15px; font-weight: 600; }
+    .nav-links a:not(.btn) { color: #E9F0EC; text-decoration: none; }
+    .nav-links a:not(.btn):hover { color: #fff; text-decoration: underline; }
+    .nav-links .btn { min-height: 44px; padding: 0 20px; }
+    .hero-body { display: flex; flex-wrap: wrap; align-items: center; gap: 40px; padding-top: 40px; }
+    .hero-text { flex: 1 1 480px; position: relative; z-index: 1; min-width: 0; padding-bottom: 64px; }
+    .hero-tagline { margin: 0 0 20px; font-size: 13px; font-weight: 700; letter-spacing: .32em; color: #9CC7B6; }
+    .brush { display: inline-block; background: var(--oranye); color: #fff; padding: 8px 22px 8px 18px; transform: rotate(-3deg);
+      clip-path: polygon(0 12%, 4% 0, 100% 6%, 97% 50%, 100% 92%, 3% 100%, 0 70%);
+      font-family: var(--display); font-weight: 700; font-size: 28px; letter-spacing: .02em; }
+    .hero h1 { margin: 6px 0 0; font-family: var(--display); font-style: italic; font-weight: 800; font-size: clamp(64px, 10vw, 140px);
+      line-height: .9; letter-spacing: .01em; text-shadow: 5px 5px 0 var(--oranye); }
+    .hero-lead { margin: 28px 0 0; max-width: 480px; font-size: 18px; color: #D5E3DC; }
+    .hero-cta { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 14px; }
+    .hero-img { flex: 1 1 460px; min-width: 0; align-self: flex-end; }
+    .hero-img img { width: 100%; border-radius: 14px 14px 0 0; }
+
+    /* Koleksi */
+    .koleksi { padding-block: 104px 96px; }
+    .sec-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px; margin-bottom: 44px; }
+    .sec-head p.lead { margin: 0; max-width: 400px; color: var(--teks-2); }
+    .grid-produk { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; }
+    .produk { background: #fff; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
+    .produk-foto { position: relative; aspect-ratio: 4 / 3; display: flex; align-items: center; justify-content: center; }
+    .produk-foto img { width: 100%; height: 100%; object-fit: cover; }
+    .badge { position: absolute; top: 14px; left: 14px; background: var(--oranye); color: var(--teks); font-size: 12px; font-weight: 700; padding: 6px 10px; border-radius: 4px; letter-spacing: .06em; }
+    .produk-isi { padding: 20px 22px 24px; display: flex; flex-direction: column; gap: 6px; flex-grow: 1; }
+    .produk-kat { margin: 0; font-size: 12px; font-weight: 700; letter-spacing: .16em; color: #5C6A63; }
+    .produk h3 { margin: 0; font-size: 20px; }
+    .produk-desk { margin: 0; font-size: 14px; line-height: 1.55; color: var(--teks-2); flex-grow: 1; }
+    .harga { margin: 10px 0 0; font-size: 18px; font-weight: 700; color: var(--hutan); }
+
+    /* XPDIC */
+    .xpdic { background: var(--hijau-muda); }
+    .xpdic-body { display: flex; flex-wrap: wrap; gap: 56px; align-items: center; padding-block: 96px; }
+    .xpdic-foto { flex: 1 1 480px; min-width: 0; }
+    .xpdic-foto img { width: 100%; border-radius: 14px; }
+    .xpdic-teks { flex: 1 1 420px; min-width: 0; }
+    .xpdic-teks h2 { margin: 0; font-family: var(--display); font-style: italic; font-weight: 800; font-size: 72px; line-height: .95; color: var(--hutan); }
+    .xpdic-teks > p { margin: 18px 0 0; font-size: 17px; line-height: 1.65; color: #3D4843; }
+    .spek { margin: 32px 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 28px; }
+    .spek div { border-top: 2px solid var(--hijau); padding-top: 14px; }
+    .spek dt { font-family: var(--display); font-weight: 700; font-size: 34px; line-height: 1.2; color: var(--hutan); }
+    .spek dd { margin: 4px 0 0; font-size: 14px; line-height: 1.5; color: var(--teks-2); }
+    fieldset { margin: 36px 0 0; padding: 0; border: 0; }
+    legend { font-size: 14px; font-weight: 700; margin-bottom: 12px; }
+    .ukuran { display: flex; flex-wrap: wrap; gap: 10px; }
+    .ukuran button { font-family: inherit; min-width: 56px; min-height: 48px; padding: 0 14px; border-radius: 6px; font-size: 16px; font-weight: 700; cursor: pointer;
+      background: #fff; color: var(--teks); border: 2px solid #8A9690; }
+    .ukuran button[aria-pressed="true"] { background: var(--hutan); color: #fff; border-color: var(--hutan); }
+    .ukuran-info { margin: 14px 0 22px; font-size: 14px; color: var(--teks-2); }
+
+    /* Cerita */
+    .cerita { display: flex; flex-wrap: wrap; gap: 56px; padding-block: 112px 64px; }
+    .cerita-logo { flex: 1 1 380px; min-width: 0; }
+    .cerita-logo img { width: 100%; max-width: 380px; }
+    .cerita-teks { flex: 1 1 520px; min-width: 0; }
+    .cerita-teks p { margin: 16px 0 0; font-size: 17px; line-height: 1.7; color: #3D4843; }
+    .cerita-teks .h2 { font-size: clamp(36px, 4.4vw, 52px); margin-bottom: 8px; }
+
+    /* Nilai */
+    .nilai { padding-block: 48px 112px; }
+    .nilai h2 { margin: 0 0 32px; font-family: var(--display); font-weight: 700; font-size: 40px; color: var(--hutan); }
+    .grid-nilai { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+    .nilai-item { background: #fff; border-radius: 12px; padding: 26px 22px; }
+    .nilai-item h3 { margin: 16px 0 8px; font-size: 19px; }
+    .nilai-item p { margin: 0; font-size: 14px; line-height: 1.6; color: var(--teks-2); }
+    .nilai-item.utama { background: var(--hutan); color: #fff; }
+    .nilai-item.utama p { color: #CFE0D8; }
+
+    /* Kampanye */
+    .kampanye { background: var(--hutan); color: #fff; }
+    .kampanye-body { display: flex; flex-wrap: wrap; gap: 56px; align-items: center; padding-block: 96px; }
+    .kampanye-teks { flex: 1 1 420px; min-width: 0; }
+    .kampanye-teks .eyebrow { color: #F08A55; }
+    .kampanye-teks h2 { margin: 0; font-family: var(--display); font-style: italic; font-weight: 800; font-size: clamp(48px, 6vw, 64px); line-height: .98; }
+    .kampanye-teks p { margin: 16px 0 0; font-size: 17px; line-height: 1.7; color: #D5E3DC; }
+    .kampanye-poster { flex: 1 1 420px; min-width: 0; display: flex; justify-content: center; }
+    .kampanye-poster img { width: 100%; max-width: 460px; border-radius: 10px; }
+
+    /* Langganan */
+    .langganan { padding-block: 88px; }
+    .langganan-box { background: #fff; border-radius: 16px; padding: 44px 40px; display: flex; flex-wrap: wrap; gap: 28px; align-items: center; justify-content: space-between; }
+    .langganan-box h2 { margin: 0; font-family: var(--display); font-weight: 700; font-size: 40px; color: var(--hutan); }
+    .langganan-box > div > p { margin: 8px 0 0; color: var(--teks-2); }
+    .form-email { flex: 1 1 420px; min-width: 0; display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; }
+    .form-email .field { flex: 1 1 240px; display: flex; flex-direction: column; gap: 6px; }
+    .form-email label { font-size: 13px; font-weight: 700; }
+    .form-email input { font-family: inherit; font-size: 16px; padding: 0 16px; min-height: 50px; border: 1.5px solid #8A9690; border-radius: 6px; color: var(--teks); }
+    .form-email .btn { min-height: 50px; background: var(--hijau); color: #fff; }
+    .form-email .btn:hover { background: var(--hutan); }
+    .form-pesan { flex-basis: 100%; margin: 4px 0 0; font-size: 14px; font-weight: 600; min-height: 1.6em; }
+    .form-pesan.ok { color: var(--hijau); }
+    .form-pesan.salah { color: #B3261E; }
+
+    /* Footer */
+    footer { background: var(--hutan-gelap); color: #CFE0D8; font-size: 14px; }
+    .footer-atas { display: flex; flex-wrap: wrap; gap: 40px; justify-content: space-between; padding-block: 56px 32px; }
+    .footer-atas img { height: 48px; width: auto; }
+    .footer-kolom { display: flex; flex-wrap: wrap; gap: 56px; }
+    .footer-kolom div { display: flex; flex-direction: column; gap: 10px; }
+    .footer-kolom p { margin: 0 0 4px; font-size: 12px; font-weight: 700; letter-spacing: .18em; color: #fff; }
+    footer a { color: #CFE0D8; text-decoration: none; }
+    footer a:hover { color: #fff; text-decoration: underline; }
+    .footer-bawah { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding-block: 20px 32px; border-top: 1px solid #1E4B3C; font-size: 13px; color: #9CB8AC; }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 17vw; }
+      .nav { justify-content: center; }
+      .nav-links { justify-content: center; }
+      .langganan-box { padding: 32px 22px; }
+      .xpdic-teks h2 { font-size: 60px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero" id="beranda">
+    <nav class="wrap nav" aria-label="Navigasi utama">
+      <a href="#beranda"><img src="assets/images/logo-white.png" alt="RIMBA, Beyond the Trail" width="412" height="100"></a>
+      <div class="nav-links">
+        <a href="#koleksi">Koleksi</a>
+        <a href="#xpdic">XPDIC 2</a>
+        <a href="#cerita">Cerita Kami</a>
+        <a href="#kampanye">Kampanye</a>
+        <a href="#koleksi" class="btn btn-oranye">Belanja</a>
+      </div>
+    </nav>
+
+    <div class="wrap hero-body">
+      <div class="hero-text">
+        <p class="hero-tagline">BEYOND THE TRAIL</p>
+        <div class="brush" aria-hidden="true">JELAJAH UNTUK YANG</div>
+        <h1><span class="sr-only">Jelajah untuk yang </span>TANGGUH!</h1>
+        <p class="hero-lead">Perlengkapan outdoor untuk jalur tropis Indonesia. Tanah becek, akar licin, hujan yang datang tiba-tiba. Kami bikin barang yang tetap bisa diandalkan di semua itu.</p>
+        <div class="hero-cta">
+          <a href="#koleksi" class="btn btn-oranye">Lihat Koleksi</a>
+          <a href="#xpdic" class="btn btn-garis">Kenalan dengan XPDIC 2</a>
+        </div>
+      </div>
+      <div class="hero-img">
+        <img src="assets/images/xpdic2.jpg" alt="Sepatu hiking RIMBA XPDIC 2 penuh lumpur di atas batu berlumut di hutan" width="1080" height="776">
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="wrap koleksi" id="koleksi">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow">KOLEKSI 2026</p>
+          <h2 class="h2">Siap dibawa naik</h2>
+        </div>
+        <p class="lead">Empat barang yang paling sering dicari pendaki. Dari kaki sampai tempat tidur di atas gunung.</p>
+      </div>
+
+      <div class="grid-produk">
+        <article class="produk">
+          <div class="produk-foto" style="background: var(--hutan)">
+            <img src="assets/images/xpdic2.jpg" alt="Sepatu XPDIC 2" loading="lazy">
+            <span class="badge">BARU</span>
+          </div>
+          <div class="produk-isi">
+            <p class="produk-kat">SEPATU HIKING</p>
+            <h3>RIMBA XPDIC 2</h3>
+            <p class="produk-desk">Mid-cut dengan sol bergerigi untuk jalur basah dan berbatu.</p>
+            <p class="harga">Rp1.249.000</p>
+          </div>
+        </article>
+
+        <article class="produk">
+          <div class="produk-foto" style="background: #3A332D">
+            <img src="assets/images/jacket.jpg" alt="Detail jaket RIMBA dengan label hijau dan ritsleting oranye" loading="lazy">
+          </div>
+          <div class="produk-isi">
+            <p class="produk-kat">JAKET</p>
+            <h3>Jaket Kabut</h3>
+            <p class="produk-desk">Dua lapis, tahan gerimis, ringan dilipat ke dalam saku sendiri.</p>
+            <p class="harga">Rp899.000</p>
+          </div>
+        </article>
+
+        <article class="produk">
+          <div class="produk-foto" style="background: #DCE7E1">
+            <svg aria-hidden="true" width="150" height="150" viewBox="0 0 120 120" fill="none" stroke="#135D46" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M42 26c0-8 8-14 18-14s18 6 18 14"/><rect x="30" y="26" width="60" height="80" rx="16"/><path d="M30 52h60"/><rect x="44" y="64" width="32" height="24" rx="5"/><path d="M60 64v24" stroke="#E8692A"/><path d="M38 106v6M82 106v6"/></svg>
+          </div>
+          <div class="produk-isi">
+            <p class="produk-kat">TAS CARRIER</p>
+            <h3>Carrier Lembah 45L</h3>
+            <p class="produk-desk">Punggung berongga supaya tidak gerah, plus cover hujan bawaan.</p>
+            <p class="harga">Rp1.149.000</p>
+          </div>
+        </article>
+
+        <article class="produk">
+          <div class="produk-foto" style="background: #F7E1D3">
+            <svg aria-hidden="true" width="170" height="150" viewBox="0 0 140 120" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 100L70 18l60 82" stroke="#135D46"/><path d="M70 18c-6 30-18 56-30 82M70 18c6 30 18 56 30 82" stroke="#E8692A"/><path d="M6 100h128" stroke="#135D46"/><path d="M70 10v8" stroke="#135D46"/></svg>
+          </div>
+          <div class="produk-isi">
+            <p class="produk-kat">TENDA</p>
+            <h3>Tenda Ranu 2P</h3>
+            <p class="produk-desk">Muat dua orang. Bisa didirikan sendirian dalam 6 menit.</p>
+            <p class="harga">Rp1.689.000</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="xpdic" id="xpdic">
+      <div class="wrap xpdic-body">
+        <div class="xpdic-foto">
+          <img src="assets/images/xpdic2.jpg" alt="Close-up sepatu XPDIC 2" loading="lazy" width="1080" height="776">
+        </div>
+        <div class="xpdic-teks">
+          <p class="eyebrow">PRODUK UNGGULAN</p>
+          <h2>XPDIC 2</h2>
+          <p>Nama XPDIC diambil dari kata expedition. Generasi kedua ini kami bikin untuk satu tujuan: kaki tetap kering dan tidak tergelincir, bahkan di turunan yang masih basah sisa hujan semalam.</p>
+
+          <dl class="spek">
+            <div><dt>5 mm</dt><dd>Gerigi sol karet, menggigit tanah lunak dan lumpur</dd></div>
+            <div><dt>412 g</dt><dd>Berat per sepatu untuk ukuran 42</dd></div>
+            <div><dt>Mesh rapat</dt><dd>Cepat kering, pasir dan kerikil kecil tidak gampang masuk</dd></div>
+            <div><dt>Tali stabilo</dt><dd>Warna hijau terang, gampang dicek saat gelap</dd></div>
+          </dl>
+
+          <fieldset>
+            <legend>Pilih ukuran</legend>
+            <div class="ukuran" id="ukuran">
+              <button type="button" aria-pressed="false">39</button>
+              <button type="button" aria-pressed="false">40</button>
+              <button type="button" aria-pressed="false">41</button>
+              <button type="button" aria-pressed="false">42</button>
+              <button type="button" aria-pressed="false">43</button>
+              <button type="button" aria-pressed="false">44</button>
+            </div>
+          </fieldset>
+          <p class="ukuran-info" id="ukuran-info" aria-live="polite">Belum pilih ukuran. Kalau ragu, ambil satu nomor lebih besar untuk kaos kaki tebal.</p>
+          <a href="#koleksi" class="btn btn-oranye">Masukkan ke keranjang</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap cerita" id="cerita">
+      <div class="cerita-logo">
+        <img src="assets/images/logo-green.png" alt="Logo RIMBA" loading="lazy">
+      </div>
+      <div class="cerita-teks">
+        <p class="eyebrow">CERITA KAMI</p>
+        <h2 class="h2">Rimba artinya hutan. Tempat kami belajar soal ketangguhan.</h2>
+        <p>Kami pilih nama RIMBA karena kata itu dekat dengan alam liar Indonesia. Pendek, gampang diucap, dan langsung membawa bayangan pohon tinggi dan jalur setapak.</p>
+        <p>Coba lihat huruf A di logo kami. Itu tenda. Oranyenya adalah api unggun pertama setelah seharian jalan. Hijaunya adalah hutan yang kami datangi berulang kali.</p>
+        <p><strong style="color: var(--hutan)">Beyond the Trail</strong> artinya melewati jalur yang sudah kamu kenal. Jalur baru, gunung baru, atau sekadar berani keluar dari rutinitas akhir pekan. RIMBA ingin ikut di perjalanan itu.</p>
+      </div>
+    </section>
+
+    <section class="wrap nilai" aria-labelledby="nilai-judul">
+      <h2 id="nilai-judul">Lima hal yang kami pegang</h2>
+      <div class="grid-nilai">
+        <div class="nilai-item utama">
+          <svg aria-hidden="true" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#F08A55" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20l6-12 4 7 3-4 5 9z"/></svg>
+          <h3>Tangguh</h3>
+          <p>Diuji di lumpur, hujan, dan batu tajam sebelum sampai ke tanganmu.</p>
+        </div>
+        <div class="nilai-item">
+          <svg aria-hidden="true" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#135D46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg>
+          <h3>Eksploratif</h3>
+          <p>Selalu ada jalur yang belum kamu coba. Kami siapkan bekalnya.</p>
+        </div>
+        <div class="nilai-item">
+          <svg aria-hidden="true" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#135D46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-8 5-14 14-14 0 9-6 14-14 14z"/><path d="M5 19l7-7"/></svg>
+          <h3>Natural</h3>
+          <p>Warna dan bahan yang terasa dekat dengan hutan, tidak mencolok sembarangan.</p>
+        </div>
+        <div class="nilai-item">
+          <svg aria-hidden="true" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#135D46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 12h16M12 4v16"/></svg>
+          <h3>Modern</h3>
+          <p>Desainnya tetap enak dipakai ke kampus atau kantor hari Senin.</p>
+        </div>
+        <div class="nilai-item">
+          <svg aria-hidden="true" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#135D46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 6l4 4-9 9H5v-4z"/><path d="M12 8l4 4"/></svg>
+          <h3>Fungsional</h3>
+          <p>Setiap saku dan jahitan punya alasan. Tidak ada yang cuma pajangan.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="kampanye" id="kampanye">
+      <div class="wrap kampanye-body">
+        <div class="kampanye-teks">
+          <p class="eyebrow">KAMPANYE</p>
+          <h2>Jelajah untuk yang Tangguh</h2>
+          <p>Sepasang sepatu yang belum dicuci setelah turun gunung. Lumpur di sol, debu di mesh. Buat kami, itu tanda sepatunya sudah bekerja.</p>
+          <p>Kampanye pertama XPDIC 2 sengaja menampilkan produk dalam kondisi kotor. Kami ingin orang melihat sepatu ini di tempat aslinya, di jalur hutan.</p>
+        </div>
+        <div class="kampanye-poster">
+          <img src="assets/images/poster-kampanye.jpg" alt="Poster kampanye RIMBA: Jelajah untuk yang Tangguh, sepatu XPDIC 2 di hutan" loading="lazy" width="1080" height="1350">
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap langganan" aria-labelledby="langganan-judul">
+      <div class="langganan-box">
+        <div style="flex: 1 1 360px; min-width: 0">
+          <h2 id="langganan-judul">Gabung Kabar Jalur</h2>
+          <p>Info rilis produk dan rute pendakian pilihan, dikirim dua minggu sekali.</p>
+        </div>
+        <form class="form-email" id="form-email" novalidate>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="nama@email.com" autocomplete="email" required>
+          </div>
+          <button type="submit" class="btn">Daftar</button>
+          <p class="form-pesan" id="form-pesan" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-atas">
+      <div>
+        <img src="assets/images/logo-white.png" alt="RIMBA, Beyond the Trail" loading="lazy">
+        <p style="margin: 18px 0 0; max-width: 300px">Perlengkapan outdoor untuk jalur tropis Indonesia.</p>
+      </div>
+      <div class="footer-kolom">
+        <div>
+          <p>BELANJA</p>
+          <a href="#koleksi">Sepatu</a>
+          <a href="#koleksi">Jaket</a>
+          <a href="#koleksi">Carrier</a>
+          <a href="#koleksi">Tenda</a>
+        </div>
+        <div>
+          <p>RIMBA</p>
+          <a href="#cerita">Cerita Kami</a>
+          <a href="#kampanye">Kampanye</a>
+          <a href="#beranda">rimbaoutdoor.com</a>
+        </div>
+      </div>
+    </div>
+    <div class="wrap footer-bawah">
+      <span>© 2026 RIMBA. Beyond the Trail.</span>
+      <span>Brand fiktif untuk tugas Strategy Brand Communication, UNDIRA.</span>
+    </div>
+  </footer>
+
+  <script>
+    // Pilih ukuran XPDIC 2
+    (function () {
+      var box = document.getElementById('ukuran');
+      var info = document.getElementById('ukuran-info');
+      box.addEventListener('click', function (e) {
+        var btn = e.target.closest('button');
+        if (!btn) return;
+        box.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
+        btn.setAttribute('aria-pressed', 'true');
+        info.textContent = 'Ukuran ' + btn.textContent + ' dipilih. Kalau ragu, ambil satu nomor lebih besar untuk kaos kaki tebal.';
+      });
+    })();
+
+    // Form langganan: belum terhubung ke server, hanya menampilkan pesan
+    (function () {
+      var form = document.getElementById('form-email');
+      var input = document.getElementById('email');
+      var pesan = document.getElementById('form-pesan');
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var val = input.value.trim();
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+          pesan.className = 'form-pesan salah';
+          pesan.textContent = 'Format email belum benar. Contoh: nama@email.com';
+          input.focus();
+          return;
+        }
+        pesan.className = 'form-pesan ok';
+        pesan.textContent = 'Terima kasih! ' + val + ' sudah masuk daftar Kabar Jalur.';
+        form.reset();
+      });
+    })();
+  </script>
+</body>
+</html>
